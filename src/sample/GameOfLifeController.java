@@ -2,8 +2,9 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 
 public class GameOfLifeController {
 
@@ -11,7 +12,14 @@ public class GameOfLifeController {
     private Button btn;
 
     @FXML
-    private GridPane grid;
+    private Canvas cnv;
+
+    private GraphicsContext gc;
+
+    public void initialize()
+    {
+        gc = cnv.getGraphicsContext2D();
+    }
 
     @FXML
     void nextGeneration(ActionEvent event) {
