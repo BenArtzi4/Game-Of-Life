@@ -11,10 +11,12 @@ import javafx.scene.shape.*;
 
 public class GameOfLifeController {
 
-    final int SIZE = 10;
+    final int MATRIX_SIZE = 10;
+    final int BOX_SIZE = 40;
 
-    Rectangle  [] [] matrix = new Rectangle[SIZE][SIZE];
-    Rectangle  [] [] tempMatrix = new Rectangle[SIZE][SIZE];
+
+    Rectangle  [] [] matrix = new Rectangle[MATRIX_SIZE][MATRIX_SIZE];
+    Rectangle  [] [] tempMatrix = new Rectangle[MATRIX_SIZE][MATRIX_SIZE];
     int [] yellowColor = {247, 220, 111};
     int [] whiteColor = {248, 249, 249};
 
@@ -30,19 +32,18 @@ public class GameOfLifeController {
     public void initialize()
     {
         gc = cnv.getGraphicsContext2D();
-        int boxSize = 40;
         int heightStart = 100;
         int widthStart = 80;
         int randomLife;
-        for (int i = 0; i < SIZE; i++)
+        for (int i = 0; i < MATRIX_SIZE; i++)
         {
-            for (int j = 0; j < SIZE; j++)
+            for (int j = 0; j < MATRIX_SIZE; j++)
             {
                 matrix[i][j] = new Rectangle();
-                matrix[i][j].setX((j * boxSize) + widthStart);
-                matrix[i][j].setY((i * boxSize) + heightStart);
-                matrix[i][j].setHeight(boxSize);
-                matrix[i][j].setWidth(boxSize);
+                matrix[i][j].setX((j * BOX_SIZE) + widthStart);
+                matrix[i][j].setY((i * BOX_SIZE) + heightStart);
+                matrix[i][j].setHeight(BOX_SIZE);
+                matrix[i][j].setWidth(BOX_SIZE);
                 /*
                 That attribute will indicate whether there is life on the site the site that represent by this rectangle
                 0 - Means "no life"
@@ -50,7 +51,7 @@ public class GameOfLifeController {
                  */
                 randomLife = (int)(Math.round(Math.random()));
                 matrix[i][j].setOpacity(randomLife);
-                gc.strokeRect(matrix[i][j].getX(),matrix[i][j].getY(),boxSize, boxSize);
+                gc.strokeRect(matrix[i][j].getX(),matrix[i][j].getY(),BOX_SIZE, BOX_SIZE);
                 if (randomLife == 1)
                 {
                     gc.setFill(Color.rgb(yellowColor[0], yellowColor[1], yellowColor[2]));
@@ -59,7 +60,7 @@ public class GameOfLifeController {
                 {
                     gc.setFill(Color.rgb(whiteColor[0], whiteColor[1], whiteColor[2]));
                 }
-                gc.fillRect(matrix[i][j].getX(),matrix[i][j].getY(),boxSize, boxSize);
+                gc.fillRect(matrix[i][j].getX(),matrix[i][j].getY(),BOX_SIZE, BOX_SIZE);
             }
         }
     }
@@ -67,21 +68,45 @@ public class GameOfLifeController {
     @FXML
     void nextGeneration(ActionEvent event)
     {
-
+        creteNextGenerationMatrix();
     }
-    /*
 
-     */
     public void creteNextGenerationMatrix()
     {
         int surroundingLife;
-        for (int i = 0; i < SIZE; i++)
-        {
-            for (int j = 0; j < SIZE; j++)
-            {
+        // change the life or death in rectangle in the temporary matrix
+        for (int i = 0; i < MATRIX_SIZE; i++) {
+            for (int j = 0; j < MATRIX_SIZE; j++) {
                 surroundingLife = checkLifeSurrounding(i, j);
+                // if there suppose to life next generation
+                if (lifeOrDeath(surroundingLife, matrix[i][j].getOpacity())) {
+                    tempMatrix[i][j].setOpacity(1);
+                } else {
+                    tempMatrix[i][j].setOpacity(0);
+                }
             }
         }
+
+        //change the life or death value in the main matrix and set color
+        for (int i = 0; i < MATRIX_SIZE; i++)
+        {
+            for (int j = 0; j < MATRIX_SIZE; j++)
+            {
+                matrix[i][j].setOpacity(tempMatrix[i][j].getOpacity());
+                if (matrix[i][j].getOpacity() == 1)
+                {
+                    gc.setFill(Color.rgb(yellowColor[0], yellowColor[1], yellowColor[2]));
+                }
+                else
+                {
+                    gc.setFill(Color.rgb(whiteColor[0], whiteColor[1], whiteColor[2]));
+                }
+                gc.fillRect(matrix[i][j].getX(),matrix[i][j].getY(),BOX_SIZE, BOX_SIZE);
+            }
+
+        }
+
+
     }
 
     public int checkLifeSurrounding(int i, int j)
@@ -161,9 +186,16 @@ public class GameOfLifeController {
         return surroundingLife;
     }
 
+    public boolean lifeOrDeath(int surroundingLife, double life)
+    {
 
+        if (life == 0)
+        {
+            return surroundingLife == 3;
+        }
 
-
+        return surroundingLife != 1 && surroundingLife != 0 && surroundingLife < 4;
+    }
 
 
 }
