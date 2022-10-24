@@ -129,7 +129,8 @@ public class GameOfLifeController
     {
         int surroundingLife = 0;
         int maxSize = 9;
-        //check Left up site's life
+
+        // Checks the life on the site up and left side
         if (i != 0 && j != 0)
         {
             if(matrix[i-1][j-1].getOpacity() == 1)
@@ -137,7 +138,7 @@ public class GameOfLifeController
                 surroundingLife++;
             }
         }
-        //check up site's life
+        // Checks the life on the site up
         if (i!= 0)
         {
             if(matrix[i-1][j].getOpacity() == 1)
@@ -146,7 +147,7 @@ public class GameOfLifeController
             }
         }
 
-        // check up right site's life
+        // Checks the life on the site up and right side
         if(i != 0 && j != maxSize)
         {
             if(matrix[i-1][j+1].getOpacity() == 1)
@@ -155,7 +156,7 @@ public class GameOfLifeController
             }
         }
 
-        // check left site's life
+        // Checks the life on the site on the left side
         if (j != 0)
         {
             if(matrix[i][j-1].getOpacity() == 1)
@@ -164,7 +165,7 @@ public class GameOfLifeController
             }
         }
 
-        // check right site's life
+        // Checks the life on the site on the right side
         if (j != maxSize)
         {
             if(matrix[i][j+1].getOpacity() == 1)
@@ -173,7 +174,7 @@ public class GameOfLifeController
             }
         }
 
-        // check left bottom site's life
+        // Checks the life on the site on the bottom left side
         if (i != maxSize && j != 0)
         {
             if(matrix[i+1][j-1].getOpacity() == 1)
@@ -182,7 +183,7 @@ public class GameOfLifeController
             }
         }
 
-        // check bottom site's life
+        // Checks the life on the site on the bottom
         if (i!= maxSize)
         {
             if(matrix[i+1][j].getOpacity() == 1)
@@ -191,7 +192,7 @@ public class GameOfLifeController
             }
         }
 
-        // check right bottom site's life
+        // Checks the life on the site on the right bottom side
         if (i != maxSize && j != maxSize)
         {
             if(matrix[i+1][j+1].getOpacity() == 1)
