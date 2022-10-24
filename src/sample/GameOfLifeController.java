@@ -72,19 +72,95 @@ public class GameOfLifeController {
     /*
 
      */
-    public void creteNextGenerationMatrix() {
-
+    public void creteNextGenerationMatrix()
+    {
+        int surroundingLife;
         for (int i = 0; i < SIZE; i++)
         {
             for (int j = 0; j < SIZE; j++)
             {
-                tempMatrix[i][j] = new Rectangle(matrix[i][j].getX(), matrix[i][j].getY(),matrix[i][j].getWidth(),matrix[i][j].getHeight());
-
+                surroundingLife = checkLifeSurrounding(i, j);
             }
+        }
+    }
 
+    public int checkLifeSurrounding(int i, int j)
+    {
+        int surroundingLife = 0;
+        int maxSize = 9;
+        //check Left up site's life
+        if (i != 0 && j != 0)
+        {
+            if(matrix[i-1][j-1].getOpacity() == 1)
+            {
+                surroundingLife++;
+            }
+        }
+        //check up site's life
+        if (i!= 0)
+        {
+            if(matrix[i-1][j].getOpacity() == 1)
+            {
+                surroundingLife++;
+            }
         }
 
+        // check up right site's life
+        if(i != 0 && j != maxSize)
+        {
+            if(matrix[i-1][j+1].getOpacity() == 1)
+            {
+                surroundingLife++;
+            }
+        }
+
+        // check left site's life
+        if (j != 0)
+        {
+            if(matrix[i][j-1].getOpacity() == 1)
+            {
+                surroundingLife++;
+            }
+        }
+
+        // check right site's life
+        if (j != maxSize)
+        {
+            if(matrix[i][j+1].getOpacity() == 1)
+            {
+                surroundingLife++;
+            }
+        }
+
+        // check left bottom site's life
+        if (j != 0 && i != maxSize)
+        {
+            if(matrix[i-1][j+1].getOpacity() == 1)
+            {
+                surroundingLife++;
+            }
+        }
+
+        // check bottom site's life
+        if (i!= maxSize)
+        {
+            if(matrix[i+1][j].getOpacity() == 1)
+            {
+                surroundingLife++;
+            }
+        }
+
+        // check right bottom site's life
+        if (i != maxSize && j != maxSize)
+        {
+            if(matrix[i+1][j+1].getOpacity() == 1)
+            {
+                surroundingLife++;
+            }
+        }
+        return surroundingLife;
     }
+
 
 
 
