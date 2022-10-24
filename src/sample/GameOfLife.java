@@ -11,13 +11,13 @@ public class GameOfLife extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("gameOfLife.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setTitle("Game Of Life");
+        primaryStage.setScene(new Scene(root, 660, 600));
         primaryStage.show();
     }
 
-
     public static void main(String[] args) {
         launch(args);
+
     }
 }
