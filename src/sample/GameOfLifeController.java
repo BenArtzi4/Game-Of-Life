@@ -9,7 +9,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 
 
-public class GameOfLifeController {
+public class GameOfLifeController
+{
 
     final int MATRIX_SIZE = 10;
     final int BOX_SIZE = 40;
@@ -19,7 +20,6 @@ public class GameOfLifeController {
     Rectangle  [] [] tempMatrix = new Rectangle[MATRIX_SIZE][MATRIX_SIZE];
     int [] yellowColor = {247, 220, 111};
     int [] whiteColor = {248, 249, 249};
-
 
     @FXML
     private Button btn;
@@ -45,11 +45,12 @@ public class GameOfLifeController {
                 matrix[i][j].setHeight(BOX_SIZE);
                 matrix[i][j].setWidth(BOX_SIZE);
                 /*
-                That attribute will indicate whether there is life on the site the site that represent by this rectangle
+                That attribute will indicate whether there is life on the site that represent by this rectangle
                 0 - Means "no life"
                 1 - Means "there is life"
                  */
                 randomLife = (int)(Math.round(Math.random()));
+                // Choose a random number 1 and 0, if there is life it will be colored yellow, otherwise white
                 matrix[i][j].setOpacity(randomLife);
                 gc.strokeRect(matrix[i][j].getX(),matrix[i][j].getY(),BOX_SIZE, BOX_SIZE);
                 if (randomLife == 1)
@@ -65,29 +66,42 @@ public class GameOfLifeController {
         }
     }
 
+    /*
+    The action performed by pressing the "next generation" button
+     */
     @FXML
     void nextGeneration(ActionEvent event)
     {
         creteNextGenerationMatrix();
     }
 
+    /*
+    This method calculates the state of the site's life by Conway's laws of genetics
+     */
     public void creteNextGenerationMatrix()
     {
         int surroundingLife;
         // change the life or death in rectangle in the temporary matrix
-        for (int i = 0; i < MATRIX_SIZE; i++) {
-            for (int j = 0; j < MATRIX_SIZE; j++) {
+        for (int i = 0; i < MATRIX_SIZE; i++)
+        {
+            for (int j = 0; j < MATRIX_SIZE; j++)
+            {
+                tempMatrix[i][j] = new Rectangle();
+                // Calculation of the number of neighboring sites with life
                 surroundingLife = checkLifeSurrounding(i, j);
-                // if there suppose to life next generation
-                if (lifeOrDeath(surroundingLife, matrix[i][j].getOpacity())) {
+                // Check and change the temp matrix if there suppose to life next generation or not
+                if (lifeOrDeath(surroundingLife, matrix[i][j].getOpacity()))
+                {
                     tempMatrix[i][j].setOpacity(1);
-                } else {
+                }
+                else
+                {
                     tempMatrix[i][j].setOpacity(0);
                 }
             }
         }
 
-        //change the life or death value in the main matrix and set color
+        // Changes the life or death values in the main matrix and set color
         for (int i = 0; i < MATRIX_SIZE; i++)
         {
             for (int j = 0; j < MATRIX_SIZE; j++)
@@ -101,14 +115,16 @@ public class GameOfLifeController {
                 {
                     gc.setFill(Color.rgb(whiteColor[0], whiteColor[1], whiteColor[2]));
                 }
+                // Changes the rectangles colors according to the received data
+                gc.strokeRect(matrix[i][j].getX(),matrix[i][j].getY(),BOX_SIZE, BOX_SIZE);
                 gc.fillRect(matrix[i][j].getX(),matrix[i][j].getY(),BOX_SIZE, BOX_SIZE);
             }
-
         }
-
-
     }
 
+    /*
+    This  method checks the number of neighboring sites where there is life
+     */
     public int checkLifeSurrounding(int i, int j)
     {
         int surroundingLife = 0;
@@ -158,9 +174,9 @@ public class GameOfLifeController {
         }
 
         // check left bottom site's life
-        if (j != 0 && i != maxSize)
+        if (i != maxSize && j != 0)
         {
-            if(matrix[i-1][j+1].getOpacity() == 1)
+            if(matrix[i+1][j-1].getOpacity() == 1)
             {
                 surroundingLife++;
             }
@@ -186,9 +202,12 @@ public class GameOfLifeController {
         return surroundingLife;
     }
 
+    /*
+    This method determines according to the life situation on the site and in the neighbors
+    and in addition according to Conway's basic laws of genetics whether there will be life in the next generation
+     */
     public boolean lifeOrDeath(int surroundingLife, double life)
     {
-
         if (life == 0)
         {
             return surroundingLife == 3;
@@ -196,6 +215,4 @@ public class GameOfLifeController {
 
         return surroundingLife != 1 && surroundingLife != 0 && surroundingLife < 4;
     }
-
-
 }
