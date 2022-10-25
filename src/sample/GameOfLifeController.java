@@ -1,10 +1,8 @@
 package sample;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 
@@ -20,9 +18,6 @@ public class GameOfLifeController
     Rectangle  [] [] tempMatrix = new Rectangle[MATRIX_SIZE][MATRIX_SIZE];
     int [] yellowColor = {247, 220, 111};
     int [] whiteColor = {248, 249, 249};
-
-    @FXML
-    private Button btn;
 
     @FXML
     private Canvas cnv;
@@ -70,7 +65,7 @@ public class GameOfLifeController
     The action performed by pressing the "next generation" button
      */
     @FXML
-    void nextGeneration(ActionEvent event)
+    void nextGeneration()
     {
         creteNextGenerationMatrix();
     }
