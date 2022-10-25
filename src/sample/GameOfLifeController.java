@@ -11,7 +11,7 @@ public class GameOfLifeController
 {
 
     final int MATRIX_SIZE = 10;
-    final int BOX_SIZE = 40;
+    final int BOX_SIZE = 60;
 
 
     Rectangle  [] [] matrix = new Rectangle[MATRIX_SIZE][MATRIX_SIZE];
@@ -27,16 +27,14 @@ public class GameOfLifeController
     public void initialize()
     {
         gc = cnv.getGraphicsContext2D();
-        int heightStart = 100;
-        int widthStart = 80;
         int randomLife;
         for (int i = 0; i < MATRIX_SIZE; i++)
         {
             for (int j = 0; j < MATRIX_SIZE; j++)
             {
                 matrix[i][j] = new Rectangle();
-                matrix[i][j].setX((j * BOX_SIZE) + widthStart);
-                matrix[i][j].setY((i * BOX_SIZE) + heightStart);
+                matrix[i][j].setX((j * BOX_SIZE));
+                matrix[i][j].setY((i * BOX_SIZE));
                 matrix[i][j].setHeight(BOX_SIZE);
                 matrix[i][j].setWidth(BOX_SIZE);
                 /*

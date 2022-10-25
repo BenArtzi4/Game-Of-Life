@@ -12,7 +12,7 @@ public class GameOfLife extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("gameOfLife.fxml"));
         primaryStage.setTitle("Game Of Life");
-        primaryStage.setScene(new Scene(root, 660, 600));
+        primaryStage.setScene(new Scene(root, 600, 630));
         primaryStage.show();
     }
 
