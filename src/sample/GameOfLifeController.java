@@ -6,14 +6,10 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 
-
 public class GameOfLifeController
 {
-
     final int MATRIX_SIZE = 10;
     final int BOX_SIZE = 60;
-
-
     Rectangle  [] [] matrix = new Rectangle[MATRIX_SIZE][MATRIX_SIZE];
     Rectangle  [] [] tempMatrix = new Rectangle[MATRIX_SIZE][MATRIX_SIZE];
     int [] yellowColor = {247, 220, 111};
@@ -65,13 +61,13 @@ public class GameOfLifeController
     @FXML
     void nextGeneration()
     {
-        creteNextGenerationMatrix();
+        createNextGenerationMatrix();
     }
 
     /*
     This method calculates the state of the site's life by Conway's laws of genetics
      */
-    public void creteNextGenerationMatrix()
+    private void createNextGenerationMatrix()
     {
         int surroundingLife;
         // change the life or death in rectangle in the temporary matrix
@@ -118,7 +114,7 @@ public class GameOfLifeController
     /*
     This  method checks the number of neighboring sites where there is life
      */
-    public int checkLifeSurrounding(int i, int j)
+    private int checkLifeSurrounding(int i, int j)
     {
         int surroundingLife = 0;
         int maxSize = 9;
@@ -200,13 +196,12 @@ public class GameOfLifeController
     This method determines according to the life situation on the site and in the neighbors
     and in addition according to Conway's basic laws of genetics whether there will be life in the next generation
      */
-    public boolean lifeOrDeath(int surroundingLife, double life)
+    private boolean lifeOrDeath(int surroundingLife, double life)
     {
         if (life == 0)
         {
             return surroundingLife == 3;
         }
-
         return surroundingLife != 1 && surroundingLife != 0 && surroundingLife < 4;
     }
 }
