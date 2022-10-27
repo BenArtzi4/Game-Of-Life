@@ -196,6 +196,6 @@ public class GameOfLifeController
         {
             return surroundingLife == 3;
         }
-        return surroundingLife != 1 && surroundingLife != 0 && surroundingLife < 4;
+        return surroundingLife == 2 || surroundingLife == 3 ;
     }
 }
