@@ -95,7 +95,9 @@ public class GameOfLifeController
         {
             for (int j = 0; j < MATRIX_SIZE; j++)
             {
+                // Set the new life (Opacity) values by the temp values
                 matrix[i][j].setOpacity(tempMatrix[i][j].getOpacity());
+                // If theres life in the next generation fill in the right color
                 if (matrix[i][j].getOpacity() == 1)
                 {
                     gc.setFill(Color.rgb(yellowColor[0], yellowColor[1], yellowColor[2]));
