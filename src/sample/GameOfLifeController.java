@@ -82,11 +82,17 @@ public class GameOfLifeController
                 if (lifeOrDeath(surroundingLife, matrix[i][j].getOpacity()))
                 {
                     tempMatrix[i][j].setOpacity(1);
-                }
-                else
+                } else
                 {
                     tempMatrix[i][j].setOpacity(0);
                 }
+
+            }
+        }
+        for (int i = 0; i < MATRIX_SIZE; i++)
+        {
+            for (int j = 0; j < MATRIX_SIZE; j++)
+            {
                 // Set the new life (Opacity) values by the temp values
                 matrix[i][j].setOpacity(tempMatrix[i][j].getOpacity());
                 // If theres life in the next generation fill in the right color
