@@ -15,6 +15,10 @@ public class GameOfLifeController
 
     private GraphicsContext gc;
 
+    /*
+    Creating rectangles that we will later draw on a canvas with the appropriate colors
+    yellow (full) for life, white (empty) for death
+     */
     public void initialize()
     {
         gc = cnv.getGraphicsContext2D();

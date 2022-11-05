@@ -2,12 +2,13 @@ package sample;
 import javafx.scene.shape.Rectangle;
 
 
-public class GameLogic {
+public class GameLogic
+{
 
     private final int matrixSize;
     private final int BOX_SIZE;
-    private final Rectangle[][] matrix;
-    private final Rectangle  [] [] tempMatrix;
+    private  Rectangle[][] matrix;
+    private  Rectangle  [] [] tempMatrix;
 
 
     public GameLogic(int size)
@@ -28,19 +29,23 @@ public class GameLogic {
 
     }
 
-    public int getMatrixSize() {
+    public int getMatrixSize()
+    {
         return matrixSize;
     }
 
-    public int getBOX_SIZE() {
+    public int getBOX_SIZE()
+    {
         return BOX_SIZE;
     }
 
-    public Rectangle[][] getMatrix() {
+    public Rectangle[][] getMatrix()
+    {
         return matrix;
     }
 
-    public Rectangle[][] getTempMatrix() {
+    public Rectangle[][] getTempMatrix()
+    {
         return tempMatrix;
     }
 
