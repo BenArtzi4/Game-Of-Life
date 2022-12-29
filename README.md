@@ -9,10 +9,10 @@ The Game of Life is a simulation game developed by mathematician John Conway as 
 
 ## The Game of Life follows these basic rules of genetics:
 
-[ ] Birth: In every site where there is "no life" that has exactly 3 living neighbors, there will be a birth in the next generation. Otherwise, the site remains "lifeless" (empty).
+* Birth: In every site where there is "no life" that has exactly 3 living neighbors, there will be a birth in the next generation. Otherwise, the site remains "lifeless" (empty).
 
-[ ] Death: At any site where there is "life" that has 0 or 1 living neighbors, death will occur in the next generation as a result of loneliness. In any site where "there is life" and if there are 4 or more living neighbors, death will occur in the next generation as a result of "population explosion".
+* Death: At any site where there is "life" that has 0 or 1 living neighbors, death will occur in the next generation as a result of loneliness. In any site where "there is life" and if there are 4 or more living neighbors, death will occur in the next generation as a result of "population explosion".
 
-[ ] Existence: Any site where "there is life" and has 2 or 3 living neighbors will continue to exist in the next generation.
+* Existence: Any site where "there is life" and has 2 or 3 living neighbors will continue to exist in the next generation.
 
 The processes of birth, death, and existence occur simultaneously in all sites and create a new state of life called a new generation.
